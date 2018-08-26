@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>选项卡切换</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+            -webkit-box-sizing: border-box;
+            -moz-box-sizing: border-box;
+            box-sizing: border-box;
+        }
+        main{
+
+            width: 200px;
+            margin: 100px auto;
+        }
+        div{
+            margin-top:8px;
+        }
+        div img{
+            width: 200px;
+        }
+        ul{
+            border: 2px solid #ECF3F9;
+            height: 30px;
+        }
+        li{
+            list-style: none;
+            float: left;
+            width: 25%;
+            text-align: center;
+            padding-bottom: 4px;
+        }
+        a{
+            text-decoration: none;
+            font-size: 14px;
+            color:#666666;
+        }
+        .on{
+            border-bottom: 2px solid #478;
+            color:#768CE6;
+            font-weight: bold;
+        }
+        .hide{display: none;}
+    </style>
+</head>
+<body>
+<main>
+    <ul>
+        <li class="on"><a href="">热点</a></li>
+        <li><a href="">军事</a></li>
+        <li><a href="">社会</a></li>
+        <li><a href="">明星</a></li>
+    </ul>
+    <div ><img src="images/p1.jpg" alt=""/></div>
+    <div class="hide"><img src="images/p2.jpg" alt=""/></div>
+    <div class="hide"><img src="images/p3.jpg" alt=""/></div>
+    <div class="hide"><img src="images/p4.jpg" alt=""/></div>
+</main>
+<script>
+    window.onload = function(){
+        var oLi=document.getElementsByTagName("li");
+        var div=document.getElementsByTagName("div");
+        for(var i=0;i<oLi.length;i++){
+            oLi[i].index=i;
+            oLi[i].onmouseover= function () {
+                for(var x= 0;x<oLi.length;x++){
+                    oLi[x].className="";
+                    div[x].className="hide";
+                }
+                oLi[this.index].className = "on";
+                div[this.index].className = "";
+            }
+        }
+
+    }
+</script>
+</body>
+</html>
