@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<script>
+    //创建父类
+    // 1.构造函数constructor，初始化属性（每个对象私有-->栈内存）
+    function Person(name,job){
+        this.name = name;
+        this.job = job;
+    }
+    //2.显示原型prototype创建方法（每个对象公用-->堆内存）
+    Person.prototype.say = function () {
+        console.log("大家好：我是"+this.name+",职业："+this.job)
+    }
+    //子类的构造函数
+    function Student(name,job,department){//继承3—1：属性继承call()
+        Person.call(this,name,job);//1）改变this属性
+        this.department = department;//2）给新添加的属性赋值
+    }
+    Student.prototype.say = function(){
+        this.say();
+        console.log(this.department )
+    }
+    Student.prototype = new Person();//继承3—2：创建指向父类的__proto__
+    Student.prototype.constructor=Student;//继承3—3：让子类拥有自己的构造函数；
+
+    var s = new Student("兰明明","程序猿","油炸系");
+    var s1 = new Student("刘鑫鑫","炸鸡柳","油炸系2");
+    console.log(s.name)
+    s.say()
+    /*var p1 = new Person("刘鑫鑫","炸鸡柳");
+    p1.say();*/
+    //原型，属性,子类方法
+</script>
+</body>
+</html>

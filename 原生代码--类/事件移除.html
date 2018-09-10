@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+<button>click me</button>
+<script>
+    var oBtn = document.getElementsByTagName("button")[0];
+
+    //绑定事件,兼容各类浏览器
+    function addEvent(elem, type, handler){
+        if(elem.addEventListener){//标准浏览器
+            elem.addEventListener(type, handler, false);
+        }else if(elem.attachEvent){//解决IE多重绑定不生效的问题
+            elem[type+handler] = function(){
+                handler.call(elem);
+            };//解决BUG: 解决每次elem的不同, 从而实现fn的不同
+            elem.attachEvent('on'+type, elem[type+handler]);
+        }
+    }
+
+
+    //移除事件, 适用各类浏览器://Bug: IE多重绑定不生效的问题
+    function removeEvent(elem, type, handler){
+        if(elem.removeEventListener){//标准浏览器
+            elem.removeEventListener('click', handler,false);
+        }else if(elem.detachEvent){
+            elem.detachEvent('on'+type, elem[type+handler]);//属性方法
+            //alert(elem.fn);
+        }
+    }
+
+    //解决bug: 创建一个共用的函数
+    function fn(){
+        alert("缩写与移除");
+    }
+
+    function fn2(){
+        alert("ssss移除");
+    }
+
+    //绑定多个事件
+    addEvent(oBtn, 'click', fn);
+    addEvent(oBtn, 'click', fn2);
+
+    //移除多个事件
+    removeEvent(oBtn, 'click', fn);
+    removeEvent(oBtn, 'click', fn2);
+</script>
+</body>
+</html>
