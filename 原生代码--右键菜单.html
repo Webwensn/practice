@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        ul,li{
+            margin: 0;
+            padding: 0;
+        }
+        #menu{
+            position: absolute;
+            display: none;
+        }
+        li{
+            list-style:none;
+            width: 100px;
+            height: 30px;
+            font: 14px/30px "黑体";
+            text-align: center;
+            border:1px solid #aaa;
+            margin-top: -1px;
+            cursor: pointer;
+        }
+        li:hover{
+            background: #dddddd;
+        }
+    </style>
+</head>
+<body>
+<ul id="menu">
+    <li>打开</li>
+    <li>上传</li>
+    <li>下载</li>
+    <li>删除</li>
+    <li>分享</li>
+</ul>
+<script>
+var oMenu = document.getElementById("menu"); 
+var oLi = document.getElementsByTagName("li");
+
+for(var i=0; i<oLi.length; i++){//监控用户点击了menu中的那一项
+    oLi[i].onclick = function(){
+        alert(this.innerHTML);
+    }
+}
+
+document.oncontextmenu = function(e){    
+    var e = e || window.event; //兼容低版本IE浏览器
+    oMenu.style.display = 'block';
+    oMenu.style.left = e.clientX+'px'; //给menu设置坐标
+    oMenu.style.top = e.clientY+'px';
+
+    console.log(event);
+    //console.log(e.clientX, e.clientY);//获取鼠标右键的坐标
+    return false;//禁用默认右键菜单
+}
+
+document.onclick = function(){//点旁边,menu消失
+    oMenu.style.display = 'none';
+}
+</script>   
+</body>
+</html>

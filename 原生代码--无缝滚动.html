@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        li{
+            list-style: none;
+        }
+        @keyframes move {
+            0%{
+                transform: translateX(0px);
+            }
+            100%{
+                transform: translateX(-500px);
+            }
+        }
+        #box{
+            width:500px;
+            height: 100px;
+            border: 5px solid #000;
+            margin: 100px auto;
+            overflow: hidden;
+        }
+        #box #list{
+            width: 200%;
+            height: 100px;
+            overflow: hidden;
+            animation: 3s move infinite linear;
+        }
+        #box #list:hover{
+            animation-play-state: paused;
+        }
+        #box #list li{
+            width:98px;
+            height:98px;
+            border:1px solid #fff;
+            background: #000;
+            color:#fff;
+            float: left;
+            font:40px/100px "黑体";
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+<div id="box">
+    <ul id="list">
+        <li>001</li>
+        <li>002</li>
+        <li>003</li>
+        <li>004</li>
+        <li>005</li>
+        <li>001</li>
+        <li>002</li>
+        <li>003</li>
+        <li>004</li>
+        <li>005</li>
+    </ul>
+</div>
+</body>
+</html>
