@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        #small,#big{
+            float: left;
+        }
+        #small{
+            width: 400px;
+            height: 267px;
+            position: relative;
+        }
+        #big{
+            width: 400px;
+            height: 267px;
+            overflow: hidden;
+            position: relative;
+            display: none;
+        }
+        #drag{
+            width: 200px;
+            height:133.5px;
+            background: rgba(244, 244, 244, 0.50);
+            position: absolute;
+            left: 0;
+            top:0;
+            display: none;
+        }
+        #mask{
+            width: 100%;
+            height: 100%;
+            background: rgba(183, 181, 255, 0.2);
+            position: absolute;
+            top:0;
+            left: 0;
+        }
+        #big img{
+            position: absolute;
+            top:0;
+            left:0;
+        }
+    </style>
+</head>
+<body>
+<div id="small">
+    <img src="images/small.jpg" alt=""/>
+    <div id="drag"></div> <!--鼠标拖拽-->
+    <div id="mask"></div>  <!--蒙板-->
+</div>
+<div id="big">
+    <img src="images/big.jpg" alt=""/>
+</div>
+
+
+<script>
+    var oSmall=document.getElementById("small");
+    var oDrag=document.getElementById("drag");
+    var oMask=document.getElementById("mask");      //遮罩层
+    var oBig=document.getElementById("big");
+    var oBigImg=oBig.getElementsByTagName("img")[0]; //大图
+    oMask.onmousemove=function(ev){//ev事件对象
+        var e=ev || window.event;
+        //（一）oDrag在oMask内移动
+        var left= e.clientX - oDrag.offsetWidth/2; //鼠标所在位置，在oDrag居中
+        var top= e.clientY - oDrag.offsetHeight/2;
+
+        //oDrag只能在oMask的范围内移动
+        if(left<0) left=0;  //左
+        if(top<0) top=0;    //上
+        var maxX=oSmall.offsetWidth-oDrag.offsetWidth;  //右
+        if(left>maxX) left=maxX;
+        var maxY=oSmall.offsetHeight-oDrag.offsetHeight; //下
+        if(top>maxY) top=maxY;
+
+        oDrag.style.left=left+"px";
+        oDrag.style.top=top+"px";
+        //console.log("mouse:"+ e.clientX, e.clientY);
+        //console.log("drag:"+left,top)
+
+        //（二）放大镜效果
+        //大图和小图实现等比例
+        var scaleX=left/maxX;
+        var scaleY=top/maxY;
+        console.log(scaleX,scaleY);
+        oBigImg.style.left=-scaleX*(oBigImg.offsetWidth-oBig.offsetWidth)+"px";
+        oBigImg.style.top=-scaleY*(oBigImg.offsetHeight-oBig.offsetHeight)+"px";
+    }
+    oMask.onmouseover=function(){
+        oBig.style.display="block"
+        oDrag.style.display="block";
+    }
+    oMask.onmouseout=function(){
+        oBig.style.display="none"
+        oDrag.style.display="none";
+    }
+
+
+    /*注意：
+    *1.大图与小图的比例是：2:1;
+    * 2.小图与oDrag的比例是：2:1
+    * */
+</script>
+</body>
+</html>
