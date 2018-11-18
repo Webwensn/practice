@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<input type="text"/><span>邮箱账号</span>
+<h2></h2>
+<script>
+    var oInput=document.getElementsByTagName("input")[0];
+    var oSpan=document.getElementsByTagName("span")[0];
+    var reg = /^([\w\.-]+)@([\da-z\.-]+)\.[a-z\.]{2,6}$/;
+    oInput.onkeyup = function(){
+        var str = oInput.value;
+        if(reg.test(str)){
+            oSpan.innerHTML="邮箱正确";
+            oSpan.style.color="#000";
+        }else{
+            oSpan.innerHTML="邮箱格式不正确，请重新输入";
+            oSpan.style.color="red";
+        }
+    }
+</script>
+</body>
+</html>
