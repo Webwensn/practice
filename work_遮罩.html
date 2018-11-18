@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        div#page{
+            width: 800px;
+            height: 800px;
+            padding: 50px;
+            position: relative;
+        }
+        div#mb{
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            top:0;
+            left:0;
+            display: none;
+        }
+        input{
+            height: 20px;
+        }
+        div#box{
+            width:300px;
+            height:300px;
+            background: #ffedf6;
+            position: absolute;
+            left:500px;
+            top:150px;
+            display: none;
+        }
+        div#box span{
+            float: right;
+            background: #e0e0e0;
+            padding: 3px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div id="page">
+        <div id="mb"></div>
+        <input type="text"/>
+        <button id="btn">点击提交</button>
+    </div>
+<div id="box">
+    <span>×关闭</span>
+</div>
+
+    <script>
+        var oBtn=document.getElementById("btn");
+        var oMb=document.getElementById("mb");
+        var oBox=document.getElementById("box");
+        var oOff=document.getElementsByTagName("span")[0];
+        oBtn.onclick=function(){
+            oMb.style.display="block";
+            oBox.style.display="block";
+            oBox.style.zIndex="999";
+            oOff.onclick=function(){
+                oBox.style.display="none";
+                oMb.style.display="none";
+            }
+        }
+    </script>
+</body>
+</html>
