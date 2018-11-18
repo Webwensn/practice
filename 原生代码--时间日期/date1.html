@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<h1></h1>
+<script>
+    /*
+    一.自由的：变量，函数（）；
+    二.有属主的（类）：属性，方法（）
+    */
+
+    function gatedate(){
+        var oH1=document.getElementsByTagName("h1")[0];
+        var curr=new Date();
+        var year=curr.getFullYear();
+        var month=curr.getMonth()+1;
+        var date=curr.getDate();
+        var day=curr.getDay();
+
+        var hour=curr.getHours();
+        var minute=curr.getMinutes();
+        var second=curr.getSeconds();
+        var mini=curr.getMilliseconds();
+
+        hour=hour<10?'0'+hour:hour;
+        minute=minute<10?'0'+minute:minute;
+        mini=mini<10?'0'+mini:mini;
+        oH1.innerText=year+'年'+month+'月'+date+'日'+hour+'时'+minute+'分'+second+'秒'+mini+'毫秒'+"星期"+day;
+    }
+    setInterval(gatedate,1000);
+    </script>
+</body>
+</html>
