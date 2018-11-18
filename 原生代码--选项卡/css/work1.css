@@ -1,0 +1,100 @@
+*{
+    margin: 0;
+    padding: 0;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+li{
+    list-style: none;
+}
+a{
+    text-decoration: none;
+}
+img{
+    border:0;
+}
+.nav_hide{
+    color:#69AEF5;
+    border-bottom: 2px solid #69AEF5;
+    font-weight: bold;
+    padding-bottom:12px;
+}
+.on{
+    display: block;
+}
+.hide{
+    display: none;
+}
+.left,.right{
+    width: 25px;
+    height: 25px;
+    background: rgba(0, 0, 0, .5);
+    color: #fff;
+    font-size: 20px;
+    text-align: center;
+    line-height: 25px;
+    cursor:pointer;
+}
+.left{
+    position: absolute;
+    top:80px;
+    left: 10px;
+}
+.right{
+    position: absolute;
+    top:80px;
+    right: 10px;
+}
+aside{
+    padding: 15px 0px;
+    width: 300px;
+    height: 400px;
+    box-shadow:0px 0px 1px #ccc;
+    margin: 100px auto;
+}
+aside nav{
+    width: 300px;
+    margin-bottom: 5px;
+}
+aside nav ul{
+    border-bottom: 2px solid #ECF3F9;
+    height: 30px;
+}
+aside nav ul li{
+    list-style: none;
+    float: left;
+    width: 20%;
+    text-align: center;
+    border-right:2px solid #CCD0DB;
+    line-height: 15px;
+}
+aside nav ul li:last-child{
+    border-right: none;
+}
+aside nav ul li a{
+    text-decoration: none;
+    font-size: 15px;
+    color:#666666;
+}
+aside dl{
+    width: 100%;
+    position: relative;
+}
+aside dl dt ul li{
+
+}
+aside dl dt img{
+    width:100%;
+    margin-bottom: 10px;
+}
+aside dl dd{
+    margin: 0px 15px;
+    padding-left:30px;
+    background: url("../images/play.jpg") no-repeat left 6px;
+    line-height: 1.8em;
+}
+aside dl dd a{
+    color:#333333;
+    font-size: 16px;
+}
