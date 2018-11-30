@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        div,ul,li{margin:0; padding:0;}
+        li{ list-style:none;}
+
+        #app{ width: 400px; margin:100px auto;}
+        #app h1{ text-align: center;}
+        #app #list li{ height:50px; background: #cccccc; margin-top:10px; padding:0 10px; line-height: 50px; cursor:pointer;}
+        #app #list li .product-name{ float:left;}
+        #app #list li .product-price{ float:right;}
+
+        #app #list .red{background: #ff0000;}
+        #app #list .del{color:#fff; float:left; margin-right:14px;}
+        #app #list .delAll{float:left; margin-right:14px;}
+    </style>
+</head>
+<body>
+    <!--
+1.MVVM: 数据驱动与双向数据绑定
+2.组件
+3.路由
+
+    -->
+ <div id="app">
+     <h1>购物车</h1>
+     <hr />
+     <div>
+         <label>名称<input type="text" v-model="name" placeholder="输入商品..."></label><br />
+         <label>价格<input type="text" v-model="price" placeholder="输入价格..."></label>
+         <button @click="add">增加</button>
+     </div>
+     <div>
+         <label><input type="text" v-model="keyword" placeholder="输入商品名称..."></label>
+         <button @click="search">搜索</button>
+     </div>
+     <ul id="list">
+         <li v-for="(product, index) in productList" :class="{red: product.isRed}" @click="select(product)">
+             <!--stop: 阻止冒泡-->
+             <span class="delAll"><input type="checkbox" @click.stop="" v-model="checked" :value="index"></span> <!--:value="index"即 v-bind:value="index"-->
+             <span class="del" @click.stop="del(index)">[X]</span>
+             <span class="product-name">{{index+1}}. {{product.name}}</span>
+             <span class="product-price">{{product.price}}</span> 
+         </li>
+     </ul>
+     <div id="total">
+         <!-- 总价: {{total}} --> <!--求总价的方法一-->
+         <button @click="delAll">删除选中</button>
+         结算: {{sum()}}
+     </div>
+ </div>   
+
+ <script src="js/vue.js"></script>
+ <script>
+ new Vue({
+     el: '#app',
+     data: {
+         productList: [
+             {
+                 'name': 'HuaWei nova 3',
+                 'price': 2900,
+                 'isRed': false,
+             },
+             {
+                 'name': '南极棉服',
+                 'price': 200,
+                 'isRed': false,
+             },
+             {
+                 'name': '北极熊帽子',
+                 'price': 400,
+                 'isRed': false,
+             },
+             {
+                 'name': '海拉尔羊肉',
+                 'price': 80,
+                 'isRed': false,
+             },
+             {
+                 'name': '万圣节披萨',
+                 'price': 180,
+                 'isRed': false,
+             },
+         ],
+          total: 0, //总价
+          name: '', //添加的商品名称
+          price: '',//添加商品的价格
+          keyword: '', //搜索商品的关键字
+          checked: [], //存入要删除商品的index
+     },
+     methods: {
+         select(product){            
+            /*  if(product.isRed==false){//方法一:
+                product.isRed = true;
+             }else{
+                product.isRed = false;
+             } */
+            // console.log(product.price);
+             product.isRed = !product.isRed; //方法二
+            
+            /* if(product.isRed){//求总价: 方法一
+                this.total += parseInt(product.price);
+            }else{
+                this.total -= parseInt(product.price);
+            } */
+         },
+         sum(){
+             let sum = 0;
+             this.productList.forEach(function(val, index){
+                 if(val.isRed){
+                     sum += parseInt(val.price);
+                     console.log(index, val.name, val.price, val.isRed);
+                 }                 
+             })
+             return sum
+         },
+         add(){
+             this.productList.push({
+                 name: this.name,
+                 price: this.price,
+                 'isRed': false,
+             });
+             this.name = '',
+             this.price = 0,
+             console.log(this.productList);
+         },
+         search(){
+             let arr=this.productList.filter((val, index)=>{
+                // console.log(val.name.includes(this.keyword));
+                 if(val.name.includes(this.keyword)){
+                    // console.log(val.name);
+                     return val;
+                 }
+             });
+             this.productList = arr;
+            //console.log(this.keyword);
+         },
+         del(index){
+             this.productList.splice(index,1);//splice(删除位置,删除数量)
+             //console.log(this.productList[index].name);
+         },
+         delAll(){
+             //console.log(this.checked);
+             let arr = this.productList.filter((val, index)=>{
+                 /* if(this.checked.includes(index)){
+                    console.log(index, val.name);
+                 } */
+              
+                 if(!this.checked.includes(index)){
+                    console.log(index, val.name);
+                    return val;  
+                 }                               
+             });
+             this.productList = arr;
+             this.checked = []; //清除选中标记
+         }
+     }
+ });
+ </script>
+</body>
+</html>
